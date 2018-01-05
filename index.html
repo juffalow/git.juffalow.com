@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Git | juffalow.com</title>
+    <script data-main="js/main" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.4/require.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/2.1.0/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/1140/2.0/1140.css">
+    <link rel="stylesheet" href="/css/explaingit.css">
+
+    <link rel="stylesheet" href="/css/main.css?v=1.0.0" />
+    <link href="/css/bootstrap.min.css?v=1.0.0" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  </head>
+  <body>
+    <nav class="nnavbar navbar-inverse navbar-static-top" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="https://juffalow.com">juffalow<span>.com</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="https://github.com/juffalow/git.juffalow.com">GitHub</a></li>
+            <li><a href="https://github.com/onlywei/explain-git-with-d3">Original repository</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://www.facebook.com/juffalow.page"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="https://twitter.com/juffalow"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://github.com/juffalow"><i class="fa fa-github"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div style="position: relative; height: calc(100% - 120px)">
+      <div id="ExplainGitZen-Container">
+        <div class="playground-container"></div>
+      </div>
+    </div>
+    <svg version="1.1" baseProfile="full"
+         xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:ev="http://www.w3.org/2001/xml-events"
+         width="0" height="0">
+
+        <marker id="triangle" refX="5" refY="5" markerUnits="strokeWidth" fill="#666"
+                markerWidth="4" markerHeight="3" orient="auto" viewBox="0 0 10 10">
+          <path d="M 0 0 L 10 5 L 0 10 z"/>
+        </marker>
+        <marker id="faded-triangle" refX="5" refY="5" markerUnits="strokeWidth" fill="#DDD"
+                markerWidth="4" markerHeight="3" orient="auto" viewBox="0 0 10 10">
+          <path d="M 0 0 L 10 5 L 0 10 z"/>
+        </marker>
+        <marker id="brown-triangle" refX="5" refY="5" markerUnits="strokeWidth" fill="#663300"
+                markerWidth="4" markerHeight="3" orient="auto" viewBox="0 0 10 10">
+          <path d="M 0 0 L 10 5 L 0 10 z"/>
+        </marker>
+    </svg>
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-xs-12">
+            <ul class="footer-info">
+              <li>Created with <i class="fa fa-heart" style="color:red"></i> by Matej <small style="color:red">'juffalow'</small> Jellus</li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-xs-12">
+            <span class="social">
+              <a href="https://www.facebook.com/juffalow.page"><i class="fa fa-facebook"></i></a>
+              <a href="https://twitter.com/juffalow"><i class="fa fa-twitter"></i></a>
+              <a href="https://github.com/juffalow"><i class="fa fa-github"></i></a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+    require(['explaingit'], function (explainGit) {
+        var examples = {
+            'commit': {
+                name: 'Commit',
+                height: 200,
+                baseLine: 0.4,
+                commitData: [
+                    {id: 'e137e9b', tags: ['master']}
+                ],
+                initialMessage: 'Type git commit a few times.'
+            },
+            'branch': {
+                name: 'Branch',
+                baseLine: 0.6,
+                commitData: [
+                    {id: 'e137e9b', tags: ['master']}
+                ]
+            },
+            'tag': {
+                name: 'Tag',
+                baseLine: 0.6,
+                commitData: [
+                    {id: 'e137e9b', tags: ['master']}
+                ]
+            },
+            'checkout': {
+                name: 'Checkout',
+                height: 500,
+                commitData: [
+                    {id: 'e137e9b'},
+                    {id: 'bb92e0e', parent: 'e137e9b', tags: ['master']},
+                    {id: 'e088135', parent: 'e137e9b', tags: ['dev']}
+                ],
+                initialMessage:
+                    'Use git checkout, git branch, and git commit commands until you understand.'
+            },
+            'checkout-b': {
+                name: 'Checkout-b',
+                height: 500,
+                commitData: [
+                    {id: 'e137e9b'},
+                    {id: 'f5b32c8', parent: 'e137e9b'},
+                    {id: 'bb92e0e', parent: 'f5b32c8', tags: ['master']},
+                    {id: 'e088135', parent: 'e137e9b', tags: ['dev']}
+                ],
+                initialMessage:
+                    'Use git checkout -b and git commit commands until you understand.'
+            },
+            'reset': {
+                name: 'Reset',
+                height: 200,
+                baseLine: 0.5,
+                commitData: [
+                    {id: 'e137e9b'},
+                    {id: '0e70093', parent: 'e137e9b'},
+                    {id: '3e33afd', parent: '0e70093', tags: ['master']}
+                ],
+                initialMessage: 'Type "git reset HEAD^".'
+            },
+            'revert': {
+                name: 'Revert',
+                height: 200,
+                baseLine: 0.5,
+                commitData: [
+                    {id: 'e137e9b'},
+                    {id: '0e70093', parent: 'e137e9b'},
+                    {id: '3e33afd', parent: '0e70093', tags: ['master']}
+                ],
+                initialMessage: 'Type "git revert 0e70093".'
+            },
+            'merge': {
+                name: 'Merge',
+                height: 500,
+                commitData: [
+                    {id: 'e137e9b'},
+                    {id: 'bb92e0e', parent: 'e137e9b', tags: ['master']},
+                    {id: 'f5b32c8', parent: 'e137e9b', tags: ['ff']},
+                    {id: 'e088135', parent: 'f5b32c8', tags: ['dev']}
+                ],
+                initialMessage:
+                    'Type "git merge dev".'
+            },
+            'rebase': {
+                name: 'Rebase',
+                height: 500,
+                commitData: [
+                    {id: 'e137e9b'},
+                    {id: 'bb92e0e', parent: 'e137e9b', tags: ['master']},
+                    {id: 'f5b32c8', parent: 'e137e9b'},
+                    {id: 'e088135', parent: 'f5b32c8', tags: ['dev']}
+                ],
+                currentBranch: 'dev',
+                initialMessage:
+                    'Type "git rebase master".'
+            },
+            'fetch': {
+                name: 'Fetch',
+                height: 500,
+                commitData: [
+                    {id: 'e137e9b', tags: ['origin/master']},
+                    {id: '6ce726f', parent: 'e137e9b'},
+                    {id: 'bb92e0e', parent: '6ce726f', tags: ['master']},
+                    {id: '0cff760', parent: 'e137e9b', tags: ['origin/dev']},
+                    {id: '4ed301d', parent: '0cff760', tags: ['dev']}
+                ],
+                originData: [
+                    {id: 'e137e9b'},
+                    {id: '7eb7654', parent: 'e137e9b'},
+                    {id: '090e2b8', parent: '7eb7654'},
+                    {id: 'ee5df4b', parent: '090e2b8', tags: ['master']},
+                    {id: '0cff760', parent: 'e137e9b'},
+                    {id: '2f8d946', parent: '0cff760'},
+                    {id: '29235ca', parent: '2f8d946', tags: ['dev']}
+                ],
+                initialMessage:
+                    'Carefully compare the commit IDs between the origin and the local repository. ' +
+                    'Then type "git fetch".'
+            },
+            'pull': {
+                name: 'Pull',
+                height: 500,
+                commitData: [
+                    {id: 'e137e9b', tags: ['origin/master']},
+                    {id: '46d095b', parent: 'e137e9b', tags: ['master']}
+                ],
+                originData: [
+                    {id: 'e137e9b'},
+                    {id: '7eb7654', parent: 'e137e9b'},
+                    {id: '090e2b8', parent: '7eb7654'},
+                    {id: 'ee5df4b', parent: '090e2b8', tags: ['master']}
+                ],
+                initialMessage:
+                    'Carefully compare the commit IDs between the origin and the local repository. ' +
+                    'Then type "git pull".'
+            },
+            'push': {
+                name: 'Push',
+                height: 500,
+                commitData: [
+                    {id: 'e137e9b', tags: ['origin/master']},
+                    {id: '46d095b', parent: 'e137e9b', tags: ['master']}
+                ],
+                originData: [
+                    {id: 'e137e9b'},
+                    {id: '7eb7654', parent: 'e137e9b', tags: ['master']}
+                ],
+                initialMessage:
+                    'Carefully compare the commit IDs between the origin and the local repository. ' +
+                    'Then type "git push".'
+            },
+            'clean': {
+                name: 'Clean',
+                height: 200,
+                baseLine: 0.4,
+                commitData: [
+                    {id: 'e137e9b', tags: ['origin/master']},
+                    {id: '0e70093', parent: 'e137e9b'},
+                    {id: '3e33afd', parent: '0e70093', tags: ['master']}
+                ],
+                initialMessage: 'Type "git reset origin/master".'
+            },
+            'fetchrebase': {
+                name: 'FetchRebase',
+                height: 500,
+                commitData: [
+                    {id: 'e137e9b', tags: ['origin/master', 'master']},
+                    {id: '46d095b', parent: 'e137e9b'},
+                    {id: 'dccdc4d', parent: '46d095b', tags: ['my-branch']}
+                ],
+                currentBranch: 'my-branch',
+                originData: [
+                    {id: 'e137e9b'},
+                    {id: '7eb7654', parent: 'e137e9b'},
+                    {id: '090e2b8', parent: '7eb7654'},
+                    {id: 'ee5df4b', parent: '090e2b8', tags: ['master']}
+                ],
+                initialMessage:
+                    'First type "git fetch". Then type "git rebase origin/master".'
+            },
+            'deletebranches': {
+                name: 'DeleteBranches',
+                height: 500,
+                baseLine: 0.6,
+                commitData: [
+                    {id: 'e137e9b'},
+                    {id: 'bb92e0e', parent: 'e137e9b'},
+                    {id: 'd25ee9b', parent: 'bb92e0e', tags: ['master']},
+                    {id: '071ff28', parent: 'e137e9b', tags: ['protoss']},
+                    {id: 'f5b32c8', parent: 'bb92e0e'},
+                    {id: 'e088135', parent: 'f5b32c8', tags: ['zerg']},
+                    {id: '9e6c322', parent: 'bb92e0e'},
+                    {id: '593ae02', parent: '9e6c322', tags: ['terran']}
+                ],
+                currentBranch: 'terran',
+                initialMessage:
+                    'Delete some branches.'
+            },
+            'freeplay': {
+                name: 'Free',
+                height: 500,
+                commitData: [
+                    {id: 'e137e9b', tags: ['origin/master', 'master']}
+                ],
+                originData: [
+                    {id: 'e137e9b'},
+                    {id: '7eb7654', parent: 'e137e9b'},
+                    {id: '090e2b8', parent: '7eb7654'},
+                    {id: 'ee5df4b', parent: '090e2b8', tags: ['master']}
+                ],
+                initialMessage:
+                    'Have fun.'
+            }
+        };
+
+        function open() {
+          console.log('opening!');
+          explainGit.reset();
+
+          explainGit.open({
+            name: 'Zen',
+            height: '100%',
+            commitData: [
+              {id: 'e137e9b', tags: ['master'], message: 'first commit'}
+            ],
+            initialMessage:
+              'Have fun.'
+          });
+        }
+
+        (function() {
+          if(document.readyState == 'complete') {
+            open();
+          } else {
+            window.addEventListener('load', open, false);
+          }
+        })();
+    });
+    </script>
+  </body>
+</html>
