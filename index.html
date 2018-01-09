@@ -297,17 +297,29 @@
         };
 
         function open() {
-          console.log('opening!');
           explainGit.reset();
 
           explainGit.open({
             name: 'Zen',
             height: '100%',
             commitData: [
-              {id: 'e137e9b', tags: ['master'], message: 'first commit'}
+                {id: 'e137e9b', tags: ['origin/master']},
+                {id: '6ce726f', parent: 'e137e9b'},
+                {id: 'bb92e0e', parent: '6ce726f', tags: ['master']},
+                {id: '0cff760', parent: 'e137e9b', tags: ['origin/dev']},
+                {id: '4ed301d', parent: '0cff760', tags: ['dev']}
+            ],
+            originData: [
+                {id: 'e137e9b'},
+                {id: '7eb7654', parent: 'e137e9b'},
+                {id: '090e2b8', parent: '7eb7654'},
+                {id: 'ee5df4b', parent: '090e2b8', tags: ['master']},
+                {id: '0cff760', parent: 'e137e9b'},
+                {id: '2f8d946', parent: '0cff760'},
+                {id: '29235ca', parent: '2f8d946', tags: ['dev']}
             ],
             initialMessage:
-              'Have fun.'
+              '<b>Basic commands:</b><br />- git commit<br />- git branch<br />- git checkout<br />- git checkout -b<br /><b>Undo commits:</b><br />- git reset<br />- git revert<br /><b>Combine branches:</b><br />- git merge<br /><b>Remote server:</b><br />- git fetch<br />- git pull<br />- git push<br />- git tag<br />Have fun ;-)'
           });
         }
 
